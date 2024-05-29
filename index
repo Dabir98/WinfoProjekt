@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Schadensfall erfassen</title>
+</head>
+<body>
+    <h1>Schadensfall erfassen</h1>
+    <form action="schadensfall_erfassen.php" method="post">
+        <label for="fahrzeug">Fahrzeug:</label>
+        <input type="text" id="fahrzeug" name="fahrzeug" required><br>
+        <input type="checkbox" class="checkbox" id="front-right">
+        <label for="beschreibung">Beschreibung:</label>
+        <textarea id="beschreibung" name="beschreibung" required></textarea><br>
+        <input type="submit" value="Schadensfall eintragen">
+    </form>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: darkred; /* Hintergrundfarbe des gesamten Dokuments auf Rot setzen */
+            }
+            .container {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh; /* Damit der Container die volle Höhe des Viewports einnimmt */
+                overflow: hidden; /* Overflow verstecken, um Text außerhalb des Containers zu verhindern */
+            }
+            .checkbox {
+                position: absolute;
+                transform: translate(-50%, -50%);
+                width: 20px;
+                height: 20px;
+                appearance: none;
+                border: 2px solid white; /* Ändere die Checkbox-Randfarbe */
+                border-radius: 50%;
+                cursor: pointer;
+            }
+            .checkbox:checked {
+                background-color: darkred; /* Ändere die Checkbox-Hintergrundfarbe */
+            }
+            #front-right {
+                top: 18vh; /* Ändere die Position der Checkboxen entsprechend */
+                left: 11vw; /* Ändere die Position der Checkboxen entsprechend */
+            }
+            #front-left {
+                top: 42vh; /* Ändere die Position der Checkboxen entsprechend */
+                left: 11vw; /* Ändere die Position der Checkboxen entsprechend */
+            }
+            #back-left {
+                bottom: 55vh; /* Ändere die Position der Checkboxen entsprechend */
+                left: 35vw; /* Ändere die Position der Checkboxen entsprechend */
+            }
+            #back-right {
+                top: 18.5vh; /* Ändere die Position der Checkboxen entsprechend */
+                left: 35vw; /* Ändere die Position der Checkboxen entsprechend */
+            }
+            #middle-top {
+                top: 18vh; /* Ändere die Position der Checkboxen entsprechend */
+                left: 25%; /* Ändere die Position der Checkboxen entsprechend */
+            }
+            #middle-bottom {
+                bottom: 54.5vh; /* Ändere die Position der Checkboxen entsprechend */
+                left: 25%; /* Ändere die Position der Checkboxen entsprechend */
+            }
+            #middle-center {
+                top: 30vh; /* Ändere die Position der Checkboxen entsprechend */
+                left: 25%; /* Ändere die Position der Checkboxen entsprechend */
+            }
+            img {
+                transform: scale(2.5);
+                position: absolute; /* Ändere die Bildpositionierung zu absolut */
+                top: 20vh; /* Ändere die Bildposition entsprechend */
+                left: 15vw; /* Ändere die Bildposition entsprechend */
+            }
+        </style>
+    </head>
+    
+    <div class="container">
+        <img src="https://img.freepik.com/psd-premium/isolierter-realistischer-matte-weisser-moderner-eleganter-grand-super-sportwagen-von-oben-aus_16145-22201.jpg" alt="Bild" width="300" height="200">
+        <input type="checkbox" class="checkbox" id="front-right">
+        <input type="checkbox" class="checkbox" id="front-left">
+        <input type="checkbox" class="checkbox" id="back-left">
+        <input type="checkbox" class="checkbox" id="back-right">
+        <input type="checkbox" class="checkbox" id="middle-top">
+        <input type="checkbox" class="checkbox" id="middle-bottom">
+        <input type="checkbox" class="checkbox" id="middle-center">
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var container = document.querySelector('.container');
+    
+            function createDamageTable(text) {
+                var table = document.createElement('table');
+                table.style.position = 'absolute';
+                table.style.top = '5%';
+                table.style.right = '40%';
+                table.style.backgroundColor = 'white';
+                table.style.color = 'black';
+                table.style.borderCollapse = 'collapse';
+                table.style.border = '1px solid black';
+    
+                var tbody = document.createElement('tbody');
+    
+                var row = tbody.insertRow();
+                var cell1 = row.insertCell();
+                var cell2 = row.insertCell();
+    
+                cell1.textContent = 'Schadensart:';
+                cell2.textContent = text;
+    
+                table.appendChild(tbody);
+                container.appendChild(table);
+            }
+    
+            function removeDamageTable() {
+                var table = container.querySelector('table');
+                if (table) {
+                    table.remove();
+                }
+            }
+    
+            document.getElementById('front-right').addEventListener('change', function() {
+                if (this.checked) {
+                    removeDamageTable();
+                    createDamageTable('Fahrzeugfront rechts');
+                } else {
+                    removeDamageTable();
+                }
+            });
+    
+            document.getElementById('front-left').addEventListener('change', function() {
+                if (this.checked) {
+                    removeDamageTable();
+                    createDamageTable('Fahrzeugfront links');
+                } else {
+                    removeDamageTable();
+                }
+            });
+    
+            document.getElementById('back-right').addEventListener('change', function() {
+                if (this.checked) {
+                    removeDamageTable();
+                    createDamageTable('Fahrzeugheck rechts');
+                } else {
+                    removeDamageTable();
+                }
+            });
+    
+            document.getElementById('back-left').addEventListener('change', function() {
+                if (this.checked) {
+                    removeDamageTable();
+                    createDamageTable('Fahrzeugheck links');
+                } else {
+                    removeDamageTable();
+                }
+            });
+    
+            document.getElementById('middle-top').addEventListener('change', function() {
+                if (this.checked) {
+                    removeDamageTable();
+                    createDamageTable('Fahrzeug rechts mittig');
+                } else {
+                    removeDamageTable();
+                }
+            });
+    
+            document.getElementById('middle-bottom').addEventListener('change', function() {
+                if (this.checked) {
+                    removeDamageTable();
+                    createDamageTable('Fahrzeug links mittig');
+                } else {
+                    removeDamageTable();
+                }
+            });
+    
+            document.getElementById('middle-center').addEventListener('change', function() {
+                if (this.checked) {
+                    removeDamageTable();
+                    createDamageTable('Fahrzeugdach');
+                } else {
+                    removeDamageTable();
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>
