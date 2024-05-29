@@ -20,14 +20,18 @@ echo "<br>";
 
 // Formulardaten abrufen und isset() verwenden, um sicherzustellen, dass die Werte vorhanden sind
 $fahrzeug = isset($_POST['fahrzeug']) ? $_POST['fahrzeug'] : '';
-$beschreibung = isset($_POST['beschreibung']) ? $_POST['beschreibung'] : '';
+$schadensarten = isset($_POST['schadensart']) ? $_POST['schadensart'] : [];
+
+// Array der Schadenarten in einen String umwandeln
+$schadensarten_str = implode(", ", $schadensarten);
 
 // SQL-Abfrage zum Einfügen der Daten in die Tabelle vorbereiten
-if ($stmt = $conn->prepare("INSERT INTO schadensfaelle (fahrzeug, beschreibung) VALUES (?, ?)")) {
-    $stmt->bind_param("ss", $fahrzeug, $beschreibung);
+$sql = "INSERT INTO schadensfaelle (fahrzeug, beschreibung) VALUES (?, ?)";
+if ($stmt = $conn->prepare($sql)) {
+    $stmt->bind_param("ss", $fahrzeug, $schadensarten_str);
 
     // Ausgabe des SQL-Befehls zur Überprüfung (nur für Entwicklung, in Produktion entfernen)
-    echo "SQL-Befehl: INSERT INTO schadensfaelle (fahrzeug, beschreibung) VALUES ('$fahrzeug', '$beschreibung')<br>";
+    echo "SQL-Befehl: INSERT INTO schadensfaelle (fahrzeug, beschreibung) VALUES ('$fahrzeug', '$schadensarten_str')<br>";
 
     // Überprüfen, ob das Einfügen erfolgreich war
     if ($stmt->execute()) {
