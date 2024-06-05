@@ -2,68 +2,14 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Schadensfall erfassen</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: darkred;
-        }
-        .container {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .checkbox {
-            position: absolute;
-            transform: translate(-50%, -50%);
-            width: 20px;
-            height: 20px;
-            appearance: none;
-            border: 2px solid white;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        .checkbox:checked {
-            background-color: darkred;
-        }
-        #front-right { top: 18vh; left: 11vw; }
-        #front-left { top: 42vh; left: 11vw; }
-        #back-left { bottom: 55vh; left: 35vw; }
-        #back-right { top: 18.5vh; left: 35vw; }
-        #middle-top { top: 18vh; left: 25%; }
-        #middle-bottom { bottom: 54.5vh; left: 25%; }
-        #middle-center { top: 30vh; left: 25%; }
-        img {
-            transform: scale(2.5);
-            position: absolute;
-            top: 20vh;
-            left: 15vw;
-        }
-    </style>
+    <title>Fahrzeugsuche</title>
 </head>
 <body>
-    <h1>Schadensfall erfassen</h1>
-    <form action="schadensfall_erfassen.php" method="post">
-        <label for="fahrzeug">Fahrzeug:</label>
-        <input type="text" id="fahrzeug" name="fahrzeug" required><br><br>
-        
-        <label for="schadensart">Schadensart:</label><br>
-        <div class="container">
-            <img src="https://img.freepik.com/psd-premium/isolierter-realistischer-matte-weisser-moderner-eleganter-grand-super-sportwagen-von-oben-aus_16145-22201.jpg" alt="Bild" width="300" height="200">
-            <input type="checkbox" class="checkbox" id="front-right" name="schadensart[]" value="Fahrzeugfront rechts">
-            <input type="checkbox" class="checkbox" id="front-left" name="schadensart[]" value="Fahrzeugfront links">
-            <input type="checkbox" class="checkbox" id="back-left" name="schadensart[]" value="Fahrzeugheck links">
-            <input type="checkbox" class="checkbox" id="back-right" name="schadensart[]" value="Fahrzeugheck rechts">
-            <input type="checkbox" class="checkbox" id="middle-top" name="schadensart[]" value="Fahrzeug rechts mittig">
-            <input type="checkbox" class="checkbox" id="middle-bottom" name="schadensart[]" value="Fahrzeug links mittig">
-            <input type="checkbox" class="checkbox" id="middle-center" name="schadensart[]" value="Fahrzeugdach">
-        </div><br>
-        
-        <input type="submit" value="Schadensfall eintragen">
+    <h1>Fahrzeugsuche nach ID</h1>
+    <form action="fahrzeugsuche.php" method="post">
+        <label for="fahrzeugid">Fahrzeug ID:</label>
+        <input type="text" id="fahrzeugid" name="fahrzeugid" required>
+        <input type="submit" value="Suchen">
     </form>
 </body>
 </html>
